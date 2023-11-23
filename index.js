@@ -26,41 +26,6 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
-
-    const toysCollection = client.db("toyTails").collection("toys");
-    const addedtoyCollection = client.db("toyTails").collection("addedtoys");
-
-    // allToys data
-    app.get("/toys", async (req, res) => {
-      const cursor = toysCollection.find();
-      const result = await cursor.toArray();
-      res.send(result);
-    });
-
-    // Cows data
-    const cowsCollection = client.db("toyTails").collection("Cow");
-    app.get("/cow", async (req, res) => {
-      const cursor = cowsCollection.find();
-      const result = await cursor.toArray();
-      res.send(result);
-    });
-
-    // Bear data
-    const bearCollection = client.db("toyTails").collection("Bear");
-    app.get("/bear", async (req, res) => {
-      const cursor = bearCollection.find();
-      const result = await cursor.toArray();
-      res.send(result);
-    });
-
-    // horse data
-    const horseCollection = client.db("toyTails").collection("horse");
-    app.get("/horse", async (req, res) => {
-      const cursor = horseCollection.find();
-      const result = await cursor.toArray();
-      res.send(result);
-    });
-
     // Send a ping to confirm a successful connection
     // await client.db("admin").command({ ping: 1 });
     // console.log("Pinged your deployment. You successfully connected to MongoDB!");
