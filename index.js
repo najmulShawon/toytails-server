@@ -3,7 +3,7 @@ const cors = require("cors");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 require("dotenv").config();
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 // middleware
 app.use(cors());
@@ -27,8 +27,34 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
     // Send a ping to confirm a successful connection
-    // await client.db("admin").command({ ping: 1 });
-    // console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    // Cows data
+    const cowsCollection = client.db("toyTails").collection("Cow");
+    app.get("/cow", async (req, res) => {
+      const cursor = cowsCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
+    // Bear data
+    const bearCollection = client.db("toyTails").collection("Bear");
+    app.get("/bear", async (req, res) => {
+      const cursor = bearCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
+    // horse data
+    const horseCollection = client.db("toyTails").collection("horse");
+    app.get("/horse", async (req, res) => {
+      const cursor = horseCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
+    await client.db("admin").command({ ping: 1 });
+    console.log(
+      "Pinged your deployment. You successfully connected to MongoDB!"
+    );
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
